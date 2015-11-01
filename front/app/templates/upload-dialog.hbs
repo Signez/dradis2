@@ -1,0 +1,236 @@
+{{#modal-dialog}}
+<div class="modal-header">
+    {{#if canCancel}}
+    <button type="button" class="close" {{action "closeModal"}}>
+        <i class="fa fa-fw fa-times"></i>
+    </button>
+    {{/if}}
+    <h4 class="modal-title" id="myModalLabel">
+        {{modalTitle}}
+    </h4>
+</div>
+<div class="modal-body">
+    {{#if unknownKind}}
+        {{#if hasWaitingUploadedFiles}}
+            <div class="alert alert-warning alert-top-bar">
+                <i class="fa fa-fw fa-file-audio-o"></i>
+                <strong>Des fichiers déjà téléversés sont en attente de métadonnées.</strong>
+                <a class="ember-link" {{action "jumpToTagging"}}>Voir les fichiers</a>
+            </div>
+        {{/if}}
+        <p>Que souhaitez-vous téléverser ?</p>
+        <div class="choose-upload list-group">
+            <a class="list-group-item ember-link" {{action "setKind" "music"}}>
+                <strong>
+                    {{kind-stamp kind="music"}}
+                    Musique
+                </strong>
+                <span class="help-block">
+                    Pause musicale et (si vous le décidez) diffusion dans le flux permanent.
+                </span>
+            </a>
+            <a class="list-group-item ember-link" {{action "setKind" "one_shot"}}>
+                <strong>
+                    {{kind-stamp kind="one_shot"}}
+                    One-shots
+                </strong>
+                <span class="help-block">
+                    Reportages, pastilles uniques, sons liés à un épisode d'émission en particulier.
+                </span>
+            </a>
+            <a class="list-group-item ember-link" {{action "setKind" "utility"}}>
+                <strong>
+                    {{kind-stamp kind="jingle"}}
+                    {{kind-stamp kind="bed"}}
+                    {{kind-stamp kind="fx"}}
+                    Jingles et sons utilitaires
+                </strong>
+                <span class="help-block">
+                    Sons récurrents d'une émission : jingles, fonds musicaux, bruitages, interludes.
+                </span>
+            </a>
+        </div>
+        <hr>
+        <p>
+            <i class="fa fa-fw fa-warning"></i>
+            <strong>Dradis 2 ne gère pas vos droits musicaux.</strong>
+            <a href="http://blog.signez.fr/spre-svp" target="_blank"><em>Pourquoi ?</em></a>
+        </p>
+        <p>
+            Ne téléversez que des musiques libres, en diffusion libre <em>sans monétisation</em> ou dont vous possédez
+            les droits d'auteurs et voisins.
+        </p>
+    {{/if}}
+    {{#if waitingDrop}}
+        {{#if musicKind}}
+            <p>Glissez-déposez une ou plusieurs musiques pour continuer.</p>
+        {{/if}}
+        {{#if oneShotKind}}
+            <p>Glissez-déposez vos reportages pour continuer.</p>
+        {{/if}}
+        {{#if utilityKind}}
+            <p>Glissez-déposez vos sons pour continuer.</p>
+        {{/if}}
+
+        {{#if waitingDrop}}
+            {{#file-drop-zone upload="upload"}}
+                <img src="/front/assets/images/empty_upload.svg" alt="Glissez déposez ici." class="sleepy-cloud" width="200" />
+                <img src="/front/assets/images/ready_upload.svg" alt="Glissez déposez ici." class="ready-cloud" width="200" /><br/>
+                <em>Glissez-déposez ici vos fichiers pour démarrer le téléversement. <a class="ember-link" {{action "manualSelect"}}>Parcourir...</a></em>
+            {{/file-drop-zone}}
+        {{/if}}
+    {{/if}}
+    {{#if uploading}}
+        <p>
+            Téléversement en cours. Veuillez patienter…
+        </p>
+        <ul class="list-group" style="margin-bottom: 0">
+            {{#each filesToUpload as |file|}}
+                <li class="list-group-item">
+                    <i class="fa fa-fw fa-file-audio-o"></i>
+                    <span class="pull-right">
+                        {{#if file.remainingDuration}}
+                            <span class="label label-outline big-label">
+                                <i class="fa fa-fw fa-clock-o"></i>
+                                {{duration file.remainingDuration}} restants
+                            </span>
+                        {{/if}}
+                        <span class="label label-default big-label">{{bytes file.rawFile.size}}</span>
+                    </span>
+                    {{file.rawFile.name}} <br/>
+                    <div class="progress" style="margin-top: 8px; margin-bottom: 0">
+                        {{#if file.uploaded}}
+                            {{#if file.success}}
+                                <div class="progress-bar progress-bar-success" style="width: 100%"></div>
+                            {{else}}
+                                <div class="progress-bar progress-bar-danger" style="width: 100%">
+                                    {{file.uploadErrorMessage}}
+                                </div>
+                            {{/if}}
+                        {{else}}
+                            <div class="progress-bar progress-bar-info progress-bar-striped active" style="{{file.widthStyle}}"></div>
+                        {{/if}}
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
+    {{/if}}
+    {{#if tagging}}
+        {{#if inspectedFile}}
+            <div class="panel panel-default" style="margin-bottom: 0">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-fw fa-file-audio-o"></i>
+                        {{inspectedFile.humanFilename}}
+                    </h3>
+                </div>
+                <div class="panel-body">
+                {{#if inspectedFile.analyzed}}
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="inspected-title" class="col-sm-2 control-label">Titre</label>
+
+                            <div class="col-sm-10">
+                                {{input id="inspected-title" type="text" class="form-control" value=inspectedFile.title}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inspected-artist" class="col-sm-2 control-label">Artiste</label>
+
+                            <div class="col-sm-10">
+                                {{input id="inspected-artist" type="text" class="form-control" value=inspectedFile.artist}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inspected-album" class="col-sm-2 control-label">Album</label>
+
+                            <div class="col-sm-10">
+                                {{input id="inspected-album" type="text" class="form-control" value=inspectedFile.album}}
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="checkbox">
+                                    <label style="display: block">
+                                        <input type="checkbox"> Ajouter dans le flux permanent
+                                        <span class="help-block">
+                                            Une fois le fichier ajouté, il pourra être joué de manière aléatoire durant
+                                            la journée.
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                {{else}}
+                    <p style="margin-top: 40px; margin-bottom: 40px; font-style: italic; text-align: center">
+                        <i class="fa fa-fw fa-cog fa-spin"></i> Analyse en cours du fichier…
+                    </p>
+                {{/if}}
+                </div>
+            </div>
+        {{else}}
+            {{#if hasWaitingUploadedFiles}}
+                <p>
+                    Les fichiers suivants ont été correctement téléversés sur le serveur.
+                    Ajoutez les métadonnées pour chacun de ces fichiers avant pouvoir les
+                    ajouter à la bibliothèque.
+                </p>
+                <div class="list-group" style="margin-bottom: 0">
+                    {{#each taggingFiles as |file|}}
+                        {{#unless file.addedToLibrary}}
+                            <a class="ember-link list-group-item" {{action "inspectFile" file}}>
+                                <i class="fa fa-fw fa-file-audio-o"></i>
+                                {{file.humanFilename}}
+                            </a>
+                        {{/unless}}
+                    {{/each}}
+                </div>
+            {{else}}
+                <p>
+                    <i class="fa fa-fw fa-spin fa-refresh"></i>
+                    Veuillez patienter…
+                </p>
+            {{/if}}
+        {{/if}}
+    {{/if}}
+</div>
+<div class="modal-footer">
+    {{#if canBack}}
+        <button type="button" class="btn btn-default pull-left" {{action "back"}}>
+            <i class="fa fa-fw fa-chevron-left"></i>
+            Retour
+        </button>
+    {{else}}
+        {{#if canCancel}}
+            <button type="button" class="btn btn-default pull-left" {{action "closeModal"}}>
+                <i class="fa fa-fw fa-times"></i>
+                Annuler
+            </button>
+        {{else}}
+            <button type="button" class="btn btn-default pull-left" disabled>
+                <i class="fa fa-fw fa-times"></i>
+                Annuler
+            </button>
+        {{/if}}
+    {{/if}}
+    {{#if canReview}}
+        <button type="button" class="btn btn-primary" {{action "markAsReviewed"}}>
+            <i class="fa fa-fw fa-chevron-right"></i>
+            Continuer
+        </button>
+    {{/if}}
+    {{#if canContinue}}
+        <button type="button" class="btn btn-primary" {{action "addCurrentFileToLibrary"}}>
+            <i class="fa fa-fw fa-check"></i>
+            Sauvegarder
+        </button>
+    {{/if}}
+    {{#if canTerminate}}
+        <button type="button" class="btn btn-primary" {{action "closeModal"}}>
+            <i class="fa fa-fw fa-check"></i>
+            Terminer
+        </button>
+    {{/if}}
+</div>
+{{/modal-dialog}}

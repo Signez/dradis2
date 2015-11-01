@@ -1,0 +1,96 @@
+<dl class="media-line" draggable="true" data-media-id="{{media.id}}">
+    {{kind-stamp kind=media.kind}}
+    <div class="add-button">
+        <button class="btn btn-default btn-xs" {{action "addMedia" bubbles=false}}>
+            <i class="fa fa-fw fa-plus"></i>
+        </button>
+    </div>
+    {{#if media.title}}
+        <dd class="title">
+            {{media.title}}
+            {{#if isPrelistening}}
+                <i class="fa fa-fw fa-headphones"></i>
+            {{/if}}
+        </dd>
+    {{else}}
+        <dd class="filename">{{media.filename}}</dd>
+    {{/if}}
+    <dd class="artist">{{media.artist}}</dd>
+    <dd class="album">{{media.album}}</dd>
+    <dd class="length">{{duration media.length}}</dd>
+
+    <audio src="{{media.publicUrl}}" preload="none"></audio>
+</dl>
+{{#if visible}}
+<div class="media-element-pane container-fluid" data-media-id="{{id}}">
+    <div class="media-info clearfix">
+        <dl>
+            <dt>Titre <i class="fa fa-fw fa-music"></i></dt>
+            <dd>{{media.title}}</dd>
+            <dt>Artiste <i class="fa fa-fw fa-user"></i></dt>
+            <dd>{{media.artist}}</dd>
+            <dt>Album <i class="fa fa-fw fa-dot-circle-o"></i></dt>
+            <dd>{{media.album}}</dd>
+            <dt>Durée <i class="fa fa-fw fa-clock-o"></i></dt>
+            <dd>{{duration media.length}}</dd>
+            <dt>Fichier <i class="fa fa-fw fa-file-audio-o"></i></dt>
+            <dd>
+                <a download href="{{media.publicUrl}}">
+                    {{media.filename}} <i class="fa fa-fw fa-download"></i>
+                </a>
+            </dd>
+        </dl>
+    </div>
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary" {{action 'addMedia'}}>
+            <i class="fa fa-fw fa-plus-square"></i> Ajouter
+        </button>
+        <button type="button" class="btn btn-primary dropdown-toggle"
+                data-toggle="dropdown">
+            <span class="caret"></span>
+        </button>
+
+        <ul class="dropdown-menu" role="menu">
+            <li>
+                <a class="ember-link" {{action 'addMediaAtBeginning'}}>
+                    <i class="fa fa-fw fa-level-up fa-rotate-270"></i> Ajouter au début
+                </a>
+            </li>
+            <li>
+                <a class="ember-link" {{action 'addMediaAtEnd'}}>
+                    <i class="fa fa-fw fa-level-down fa-rotate-90"></i> Ajouter à la fin
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a class="ember-link">
+                    <i class="fa fa-fw fa-hand-o-up"></i> À propos du glisser déposer...
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    {{#if isPrelistening}}
+        <div class="btn-group">
+            <button type="button" class="btn btn-default" {{action "prelisteningBackward"}}>
+                <i class="fa fa-fw fa-backward"></i>
+            </button>
+            <button type="button" class="btn btn-default" {{action "prelisteningStop"}}>
+                <i class="fa fa-fw fa-stop"></i> Arrêter
+            </button>
+            <button type="button" class="btn btn-default" {{action "prelisteningForward"}}>
+                <i class="fa fa-fw fa-forward"></i>
+            </button>
+        </div>
+        <label class="label label-outline big-label">
+            <i class="fa fa-fw fa-headphones"></i>
+            {{duration prelisteningElapsed}} / {{duration prelisteningDuration}}
+        </label>
+    {{else}}
+        <button type="button" class="btn btn-default" {{action "prelisteningPlay"}}>
+            <i class="fa fa-fw fa-headphones"></i> Préécouter
+        </button>
+    {{/if}}
+</div>
+{{/if}}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <link href='/front/assets/app.css' rel='stylesheet' type='text/css'>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+     <div class="col-md-offset-3 col-md-6 text-center" style="margin-top: 100px; margin-bottom: 50px;">
+         <img src="/front/assets/images/Dradis2-Welcome.png" alt="Dradis 2" />
+     </div>
+  </div>
+  <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+          <section class="login-box panel panel-primary">
+              <div class="panel-heading">
+                  <h3 class="panel-title">
+                      <i class="fa fa-fw fa-lock"></i> Connexion à Dradis
+                  </h3>
+              </div>
+              <div class="panel-body">
+
+                  {% if true %}
+                  <p class="bg-danger row" style="margin-top: -15px; padding: 15px;">
+                      <i class="fa fa-warning"></i> Utilisateur inconnu ou mot de passe incorrect.<br/>
+                      <small>(ProTip™ : nos identifiants sont en minuscule, et les mots de passe sensibles à la casse !)</small>
+                  </p>
+                  {% endif %}
+
+                  <form class="form-horizontal" role="form" method="post" action="/login">
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label lead">
+                              <i class="fa fa-fw fa-user"></i>
+                          </label>
+                          <div class="col-sm-9">
+                              <p class="form-control-static">
+                                  Pour accéder à Dradis, merci de vous authentifier avec vos identifiants
+                                  Trichelieu Network.
+                              </p>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputEmail3" class="col-sm-3 control-label">Identifiant</label>
+                          <div class="col-sm-9">
+                              <input class="form-control" id="inputEmail3" placeholder="Spikly">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputPassword3" class="col-sm-3 control-label">Mot de passe</label>
+                          <div class="col-sm-9">
+                              <input type="password" class="form-control" id="inputPassword3" placeholder="arriere-du-cheval">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="col-sm-offset-3 col-sm-9">
+                              <div class="checkbox">
+                                  <label>
+                                      <input type="checkbox"> Se souvenir de moi
+                                  </label>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="col-sm-offset-3 col-sm-9">
+                              <button type="submit" class="btn btn-primary">
+                                  Se connecter à Dradis
+                              </button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </section>
+      </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+{{#modal-dialog}}
+<div class="modal-header">
+    <button type="button" class="close" {{action "closeModal"}}>
+        <i class="fa fa-fw fa-times"></i>
+    </button>
+    <h4 class="modal-title" id="myModalLabel">
+        Opérations de maintenance
+    </h4>
+</div>
+<div class="modal-body">
+    <p>
+        <i class="fa fa-fw fa-warning"></i>
+        <strong>Ceci pourrait casser l'antenne et déclencher un cataclysme.</strong>
+    </p>
+    <p>
+        N'utilisez ces commandes que si un administrateur de l'antenne vous l'a demandé. Les conséquences peuvent
+        être irréversibles.
+    </p>
+    <hr>
+    <p>
+        <button class="btn btn-danger" {{action "maintenance_bootstrap"}}>
+            <i class="fa fa-fw fa-cogs"></i> Boostrapper Dradis
+        </button>
+        <span class="help-block">
+            Crée les studios, actions et autres playlists de base de Dradis. À activer en cas de (ré)installation
+            de Dradis pour la première fois.
+        </span>
+    </p>
+    <hr>
+    <p>
+        <button class="btn btn-warning" {{action "refresh"}}>
+            <i class="fa fa-fw fa-refresh"></i> Reconstruire la bibliothèque
+        </button>
+        <span class="help-block">
+            Rescanne complètement la bibliothèque pour y trouver des changements. À utiliser en cas de modification
+            manuelle du dossier contenant les fichiers de bibliothèque, sans passer par le téléversement intégré.
+        </span>
+    </p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" {{action "closeModal"}}>Fermer</button>
+</div>
+{{/modal-dialog}}

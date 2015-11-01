@@ -1,0 +1,108 @@
+<div class="navbar navbar-default navbar-toolbar">
+    <ul class="nav navbar-nav navbar-right" style="margin-right: 0px">
+        <li class="dropdown">
+            <a class="ember-link dropdown-toggle"
+               data-toggle="dropdown">
+                {{#if desc}}
+                    <i class="fa fa-fw fa-sort-amount-desc"></i>
+                {{else}}
+                    <i class="fa fa-fw fa-sort-amount-asc"></i>
+                {{/if}}
+                Tri <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="ember-link" {{action "sortBy" "artist" bubbles=false}}>
+                        {{#if sortedByArtist}}
+                            <i class="fa fa-fw fa-circle"></i>
+                        {{else}}
+                            <i class="fa fa-fw fa-circle-thin"></i>
+                        {{/if}}
+                        <i class="fa fa-fw fa-user"></i> Artiste
+                    </a>
+                </li>
+                <li class="{{if sortedByTitle 'main-action'}}">
+                    <a class="ember-link" {{action "sortBy" "title" bubbles=false}}>
+                        {{#if sortedByTitle}}
+                            <i class="fa fa-fw fa-circle"></i>
+                        {{else}}
+                            <i class="fa fa-fw fa-circle-thin"></i>
+                        {{/if}}
+                        <i class="fa fa-fw fa-music"></i> Titre
+                    </a>
+                </li>
+                <li>
+                    <a class="ember-link" {{action "sortBy" "album" bubbles=false}}>
+                        {{#if sortedByAlbum}}
+                            <i class="fa fa-fw fa-circle"></i>
+                        {{else}}
+                            <i class="fa fa-fw fa-circle-thin"></i>
+                        {{/if}}
+                        <i class="fa fa-fw fa-dot-circle-o"></i> Album
+                    </a>
+                </li>
+                <li>
+                    <a class="ember-link" {{action "sortBy" "length" bubbles=false}}>
+                        {{#if sortedByLength}}
+                            <i class="fa fa-fw fa-circle"></i>
+                        {{else}}
+                            <i class="fa fa-fw fa-circle-thin"></i>
+                        {{/if}}
+                        <i class="fa fa-fw fa-clock-o"></i> Durée
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a class="ember-link" {{action "toggleOrder" bubbles=false}}>
+                        {{#if desc}}
+                            <i class="fa fa-fw fa-check-square-o"></i>
+                        {{else}}
+                            <i class="fa fa-fw fa-square-o"></i>
+                        {{/if}}
+                        <i class="fa fa-fw fa-sort"></i> Ordre inverse
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a class="ember-link" {{action "openModal" "upload-dialog"}}>
+                <i class="fa fa-fw fa-upload"></i> Ajouter…
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="library-wrapper main-scrollable-content" {{action "scrolling" on="scroll"}}>
+    {{!-- <div class="search-prompt">
+        <form {{action "search" on="submit"}}>
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <i class="fa fa-search"></i> Rechercher
+                    </button>
+                </span>
+                {{input value=queryField class="form-control search-field" placeholder="Titre, album, artiste..."}}
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" disabled="{{clearDisabled}}" {{action "clearSearch"}}>
+                        <i class="fa fa-times"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+    </div> --}}
+    <ul class="library list-group">
+        {{#each model.content as |element|}}
+            {{media-element content=element addMedia="addMediaToPlaylist"}}
+        {{else}}
+            <li class="list-group-item nothing-in-library">
+                <img src="/front/assets/images/empty_search.svg" alt="" style="opacity: 0.4;" /> <br/>
+                <i class="fa fa-exclamation-circle fa-fw"></i> Rien à afficher ici. Une faute d'orthographe dans votre recherche ?
+            </li>
+        {{/each}}
+
+        {{#if haveNextPage}}
+            <button class="list-group-item btn btn-block btn-default" type="button" {{action "loadNextPage"}}>
+                Changer plus… <small>({{elementsLeft}} éléments restants)</small>
+            </button>
+        {{/if}}
+    </ul>
+</div>

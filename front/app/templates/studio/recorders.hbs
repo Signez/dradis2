@@ -1,0 +1,115 @@
+<div class="container-fluid" style="margin-left: 15px; margin-right: 15px; margin-top: 30px;">
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        {{#if isRecorderShowPowered}}
+                            <span class="label label-success pull-right">ON</span>
+                        {{else}}
+                            <span class="label label-danger pull-right">OFF</span>
+                        {{/if}}
+                        <i class="fa fa-save"></i>&nbsp; Enregistreur du studio (Show)
+                    </h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                      <span class="pull-right">
+                          {{#if isRecorderShowPowered}}
+                              <button type="button" class="btn btn-xs btn-default" {{action "stopRecorderShow"}}>
+                                  <i class="fa fa-fw fa-times"></i> Arrêter
+                              </button>
+                          {{else}}
+                              <button type="button" class="btn btn-xs btn-default" {{action "startRecorderShow"}}>
+                                  <i class="fa fa-fw fa-save"></i> Lancer maintenant
+                              </button>
+                          {{/if}}
+                      </span>
+
+                    {{#if isRecorderShowPowered}}
+                        Enregistrement en cours
+                    {{else}}
+                        Éteint
+                    {{/if}}
+                    </li>
+                    {{#each studioStatus.lastShowRecords as |record|}}
+                        {{record-file record=record}}
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        {{#if isRecorderGoldPowered}}
+                            <span class="label label-success pull-right">ON</span>
+                        {{else}}
+                            <span class="label label-danger pull-right">OFF</span>
+                        {{/if}}
+                        <i class="fa fa-microphone"></i>&nbsp; Enregistreur du plateau (Gold)
+                    </h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                      <span class="pull-right">
+                          {{#if isRecorderGoldPowered}}
+                              <button type="button" class="btn btn-xs btn-default" {{action "stopRecorderGold"}}>
+                                  <i class="fa fa-fw fa-times"></i> Arrêter
+                              </button>
+                          {{else}}
+                              <button type="button" class="btn btn-xs btn-default" {{action "startRecorderGold"}}>
+                                  <i class="fa fa-fw fa-save"></i> Lancer maintenant
+                              </button>
+                          {{/if}}
+                      </span>
+
+                    {{#if isRecorderGoldPowered}}
+                        Enregistrement en cours
+                    {{else}}
+                        Éteint
+                    {{/if}}
+                    </li>
+                    {{#each studioStatus.lastGoldRecords as |record|}}
+                        {{record-file record=record}}
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        {{#if isPigeRecorderPowered}}
+                            <span class="label label-success pull-right">ON</span>
+                        {{else}}
+                            <span class="label label-danger pull-right">OFF</span>
+                        {{/if}}
+                        <i class="fa fa-pencil-square-o"></i>&nbsp; Pige commune d'antenne
+                    </h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <em>La pige d'antenne est permanente et ne peut être arrêtée.</em>
+                    </li>
+                    {{#each status.lastPigeRecords as |record|}}
+                    <a href="{{record.url}}">
+                        <li class="list-group-item">
+                            <i class="fa fa-fw fa-file-audio-o"></i> {{record.filename}}
+                        </li>
+                    </a>
+                    {{/each}}
+                </ul>
+                <div class="panel-footer">
+                    <small>
+                        Les piges sont des enregistrements de mauvaise qualité, conservées
+                        pour des raisons légales. Il est préférable de ne pas se baser dessus
+                        en usage normal.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    </div>
+</div>

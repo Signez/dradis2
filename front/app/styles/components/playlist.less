@@ -1,0 +1,50 @@
+.playlist {
+  margin: 0;
+  padding: 0;
+  height: calc(~"100% - 50px");
+  overflow: auto;
+  overflow-x: hidden;
+  clear: left;
+
+  .list-group-item:first-of-type {
+    border-top-width: 0;
+  }
+
+  .list-group-item {
+    border-left: 0 none;
+    border-right: 0 none;
+  }
+
+  &.sort-hover {
+    background-color: orange;
+  }
+}
+
+.playlist-breadcrumb {
+  margin-bottom: 0;
+}
+
+.nothing-in-playlist {
+  background-color: transparent;
+  text-align: center;
+  font-style: italic;
+  color: #888888;
+  cursor: default;
+}
+
+.end-hint {
+  font-style: italic;
+  font-size: 90%;
+  color: #888888;
+  border-bottom: 0 none;
+
+  .ember-link {
+    color: inherit;
+    text-decoration: underline;
+  }
+}
+
+.moving-placeholder {
+  background-color: #eef2ff;
+  height: 65px;
+}

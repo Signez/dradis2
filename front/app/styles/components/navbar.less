@@ -1,0 +1,184 @@
+.top-navbar {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 60px;
+  color: white;
+  margin-bottom: 0;
+  border-bottom: 0 none;
+
+  display: flex;
+  align-items: center;
+}
+
+.top-navbar .navbar-nav > li > a, .top-navbar .navbar-text {
+  color: white;
+}
+
+.main-search-field-zone {
+  position: relative;
+  flex-grow: 1;
+}
+
+.main-search-field {
+  color: rgba(255,255,255,1);
+  background-color: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 10px;
+  border-radius: 5px;
+  height: 34px;
+  position: relative;
+  padding-left: 32px;
+  width: 100%;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: rgba(255,255,255,0.8);
+
+    &::-moz-placeholder {
+      color: rgba(255,255,255,0.8);
+    }
+  }
+
+  &::-moz-placeholder {
+    color: rgba(255,255,255,0.5);
+    transition: color 0.2s;
+  }
+
+  &:focus {
+    color: rgba(255,255,255,1);
+  }
+}
+
+.main-search-field::-moz-placeholder {
+   font-style: italic;
+}
+
+.icon-search {
+  position: absolute;
+  top: 50%;
+  margin-top: -8px;
+  left: 8px;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+}
+
+.main-search-field:focus ~ .icon-search {
+  opacity: 0.8;
+}
+
+.top-right-zone {
+  flex-basis: 350px;
+}
+
+.navbar-collapse {
+    padding-right: 0;
+}
+
+.antenna-button {
+  font-weight: bold;
+  padding: 0;
+  vertical-align: bottom;
+  color: white;
+  width: 220px;
+  text-decoration: none;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  &:hover, &:focus {
+    text-decoration: none;
+    background-color: rgba(0,0,0,0.2);
+  }
+
+  .antenna-name {
+    margin-right: 0;
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.dradis-logo {
+  display: inline-block;
+  margin-left: 14px;
+  margin-right: 12px;
+}
+
+.navbar-element {
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+.activity-indicator {
+    width: 44px;
+    height: 44px;
+    vertical-align: bottom;
+}
+
+.circle-container {
+    fill-rule: evenodd;
+    fill: #ececec;
+    stroke: #969696;
+}
+
+.circle-container.perm {
+    fill: #6e6e6e;
+    stroke: #6e6e6e;
+}
+
+.circle-container.live {
+    fill: #592426;
+    stroke: #592426;
+}
+
+.filling-arc {
+    fill-rule: evenodd;
+    fill: transparent;
+}
+
+.antenna-menu {
+  left: 55px;
+  margin-top: -18px;
+}
+
+.info-zone {
+  margin-left: 0;
+
+  .big-label {
+    margin-right: 5px;
+  }
+}
+
+.show-name {
+  display: inline-block;
+  margin-right: 10px;
+  cursor: default;
+}
+
+.ellipsised {
+  max-width: 200px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: top;
+  text-overflow: ellipsis;
+}
+
+.navbar-toolbar {
+  margin-left: 0;
+  border-width: 0 0 1px 0;
+  margin-bottom: 0;
+}
+
+.little-emblem {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  vertical-align: -1px;
+  border-radius: 3px;
+  margin-right: 4px;
+
+}

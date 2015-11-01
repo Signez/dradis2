@@ -1,0 +1,79 @@
+{{#if content.isPlaying}}
+    <div class="current-element-bar">
+        {{#if content.media}}
+            <button class="btn btn-default btn-xs skipper" {{action "skip"}}>
+                <i class="fa fa-fw fa-fast-forward"></i>
+            </button>
+            <small class="timer elapsed">{{duration content.elapsed}}</small>
+            <div class="progress flex-expand">
+              <div class="progress-bar progress-bar-success" style="{{progressBarStyle}}">
+              </div>
+            </div>
+            <small class="timer before-end">{{duration content.beforeEnd}}</small>
+        {{else}}
+            {{#if content.action}}
+                <small class="timer elapsed flex-expand">Depuis {{duration content.elapsed}}</small>
+                <div class="btn-group">
+                    <button class="btn btn-default btn-xs" {{action "startIntro"}}>
+                        <i class="fa fa-fw fa-play"></i> Intro.
+                    </button>
+                    <button class="btn btn-default btn-xs" {{action "endLive"}}>
+                        <i class="fa fa-fw fa-step-forward"></i>
+                    </button>
+                </div>
+            {{/if}}
+        {{/if}}
+    </div>
+{{else}}
+    {{#if content.media}}
+        <div class="current-element-bar">
+            <div class="flex-expand">
+
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-default btn-xs" data-toggle="dropdown">
+                    <i class="fa fa-fw fa-play"></i> Démarrer sans diffusion
+                </button>
+            </div>
+        </div>
+    {{/if}}
+    {{#if content.action}}
+        {{#if content.action.isRunStudio}}
+            <div class="current-element-bar">
+                <div class="flex-expand">
+                    {{#if content.scheduled}}
+                        <div class="btn-group">
+                            <button class="btn btn-info btn-xs" {{action "startIntro"}}>
+                                <i class="fa fa-fw fa-clock-o"></i>
+                            </button>
+                            <button class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
+                                À 16h30 (dans 3:45:23) &nbsp;<i class="fa fa-caret-down"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a class="ember-link"><i class="fa fa-fw fa-clock-o"></i> Modifier la programmation…</a></li>
+                              <li><a class="ember-link"><i class="fa fa-fw fa-circle-thin"></i> Annuler la programmation</a></li>
+                            </ul>
+                        </div>
+                    {{else}}
+                        <button class="btn btn-default btn-xs">
+                            <i class="fa fa-fw fa-clock-o"></i> Programmer…
+                        </button>
+                    {{/if}}
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-default btn-xs" data-toggle="dropdown">
+                        <i class="fa fa-fw fa-play-circle"></i> Démarrer <i class="fa fa-fw fa-caret-down"></i>
+                    </button>
+                    <ul class="dropdown-menu pull-right">
+                      <li><a class="ember-link main-action" {{action "selectAndRun"}}><i class="fa fa-fw fa-play-circle"></i> Prendre l'antenne et démarrer</a></li>
+                      <li><a class="ember-link" {{action "run"}}><i class="fa fa-fw fa-play"></i> Démarrer sans être diffusé</a></li>
+                      <li class="divider"></li>
+                      <li><a class="ember-link"><i class="fa fa-fw fa-clock-o"></i> Programmer une prise d'antenne...</a></li>
+                    </ul>
+                </div>
+            </div>
+        {{/if}}
+    {{/if}}
+{{/if}}
+
+

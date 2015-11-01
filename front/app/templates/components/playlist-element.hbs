@@ -1,0 +1,74 @@
+{{#if content.isReady}}
+    <div class="action-buttons">
+        <button class="btn btn-default btn-xs" {{action "removeElement"}} title="{{content.position}}">
+            <i class="fa fa-fw fa-trash-o"></i>
+        </button>
+    </div>
+{{/if}}
+{{kind-stamp kind=content.kind}}
+{{#if content.media}}
+    {{#with content.media as |media|}}
+        <small class="duration">{{duration media.length}}</small>
+        <div class="title">
+            {{media.title}}
+        </div>
+        <div class="artist">
+            {{media.artist}}
+        </div>
+        <div class="album">
+            {{media.album}}
+        </div>
+    {{/with}}
+{{/if}}
+{{#if content.action}}
+    <div class="title" title="{{task}}">
+        {{#unless isUpdatingLiveContent}}
+            <span class="ember-link hover-editable" {{action "showUpdateLiveContent"}}>
+                {{#if content.live_content}}
+                    {{content.live_content}}
+                {{else}}
+                    {{content.action.title}}
+                {{/if}}
+            </span>
+        {{else}}
+            <form {{action "updateLiveContent" on="submit"}}>
+                <div class="input-group">
+                    {{input class="form-control js-autofocus" type="text" value=editedLiveContent}}
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">
+                            <i class="fa fa-fw fa-pencil"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        {{/unless}}
+    </div>
+
+    <div class="comment">
+        {{#unless isUpdatingComment}}
+            {{#if content.comment}}
+                <span class="ember-link hover-editable" {{action "showUpdateComment"}}>
+                    <strong>Note :</strong> {{content.comment}}
+                </span>
+            {{else}}
+                <em class="text-placeholder ember-link hover-editable" {{action "showUpdateComment"}}>
+                    Ajouter une note
+                </em>
+            {{/if}}
+        {{else}}
+            <form {{action "updateComment" on="submit"}}>
+                <div class="input-group">
+                    {{input class="form-control js-autofocus" type="text" autofocus=true value=editedComment}}
+                    <span class="input-group-btn">
+                        <button class="btn btn-default">
+                            <i class="fa fa-fw fa-edit"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        {{/unless}}
+    </div>
+{{/if}}
+{{#if content.isCurrent}}
+    {{partial "components/current-element-bar"}}
+{{/if}}

@@ -1,0 +1,34 @@
+{{render "status-bar" studios=studios}}
+<div class="workspace">
+    <div class="menu-container">
+        <ul class="nav nav-pills nav-stacked">
+            {{#link-to "studio.dashboard" tagName="li" href=false}}
+                <a class="ember-link" href="{{view.href}}">
+                    <i class="fa fa-fw fa-dashboard"></i> Tableau de bord
+                </a>
+            {{/link-to}}
+            {{#link-to "studio.library" tagName="li" href=false}}
+                <a class="ember-link" href="{{view.href}}">
+                    <i class="fa fa-fw fa-book"></i> Bibliothèque
+                </a>
+            {{/link-to}}
+            {{#link-to "studio.recorders" tagName="li" href=false}}
+                <a class="ember-link" href="{{view.href}}">
+                    <i class="fa fa-fw fa-save"></i> Enregistreurs
+                </a>
+            {{/link-to}}
+            {{#link-to "studio.console" tagName="li" href=false}}
+                <a class="ember-link" href="{{view.href}}">
+                    <i class="fa fa-fw fa-sliders"></i> Console
+                </a>
+            {{/link-to}}
+        </ul>
+    </div>
+    <div class="main-container">
+        {{ outlet 'main' }}
+    </div>
+    <div class="playlist-container">
+        {{ outlet 'left' }}
+    </div>
+</div>
+{{ outlet 'modal' }}

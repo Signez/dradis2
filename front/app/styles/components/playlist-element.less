@@ -1,0 +1,170 @@
+.playlist-element {
+  padding-left: 55px;
+
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform 0.5s, opacity 0.5s;
+
+  &.out {
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &.will-be-destroyed {
+    transition: transform 0.5s, opacity 0.2s, height 0.5s, padding-top 0.5s, padding-bottom 0.5s;
+    overflow: hidden;
+  }
+
+  &.destroyed {
+    transform-origin: top center;
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &.collapsed {
+    transform-origin: top center;
+    height: 0 !important;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &.dragging {
+    opacity: 0.5;
+  }
+
+  .title {
+    font-weight: bold;
+  }
+
+  .artist {
+    font-style: italic;
+    font-size: 85%;
+    display: inline-block;
+  }
+
+  .album {
+    font-size: 85%;
+    display: inline-block;
+  }
+
+  .comment {
+    font-size: 85%;
+    display: block;
+  }
+
+  .task {
+    font-size: 85%;
+    display: inline-block;
+  }
+
+  .action-buttons {
+    position: absolute;
+    left: 0px;
+    bottom: 5px;
+    width: 40px;
+    z-index: 100;
+    text-align: right;
+
+    button {
+      padding-right: 2px;
+      border-right: 0 none;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      color: #9b9b9b;
+
+      &:hover {
+        color: inherit;
+      }
+    }
+  }
+
+  .duration {
+    font-weight: normal;
+    float: right;
+    line-height: 1.7;
+    margin-top: 1px;
+  }
+
+  &.current-element {
+  }
+
+  .current-element-bar {
+    clear: both;
+    background-color: #f1f1f1;
+    margin: 5px -15px -10px -11px;
+    padding: 5px 8px;
+    display: flex;
+    align-items: center;
+    width: calc(~"100% + 26px");
+  }
+
+  .progress {
+    height: 5px;
+    margin: 0 5px;
+
+    div.progress-bar {
+      transition-timing-function: linear;
+    }
+  }
+
+  .flex-expand {
+    flex-grow: 1;
+  }
+
+  .skipper {
+    order: 4;
+  }
+
+  .timer {
+    min-width: 30px;
+  }
+
+  .before-end {
+    margin-right: 5px;
+  }
+
+  &.status-done {
+    color: #9b9b9b;
+  }
+
+  position: relative;
+
+  &.current-element {
+    z-index: 100;
+  }
+
+  .btn-edit {
+    opacity: 0;
+  }
+
+  &:hover .btn-edit {
+    opacity: 1;
+  }
+
+  .kind-stamp {
+    background-color: transparent;
+    color: black;
+    position: absolute;
+    height: 100%;
+    width: 44px;
+    left: 0;
+    top: 0;
+    text-align: right;
+    padding-top: 13px;
+    padding-right: 8px;
+    border-right-width: 4px;
+    border-right-style: solid;
+    border-radius: 0;
+    text-shadow: none;
+  }
+
+  &.status-done .kind-stamp {
+    opacity: 0.4;
+  }
+
+
+}

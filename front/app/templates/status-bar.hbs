@@ -1,0 +1,144 @@
+    <nav class="top-navbar">
+        <a class="antenna-button dropdown-toggle ember-link" data-toggle="dropdown">
+            <span class="dradis-logo">
+                <img src="/public/assets/images/dradis2_logo.png" />
+            </span>
+            <span class="antenna-name">
+                {{!--{{currentStudio.name}} --}}
+                KnarfWorld
+                <b class="caret"></b>
+            </span>
+        </a>
+        <ul class="dropdown-menu antenna-menu" role="menu">
+            {{#each sortedStudios as |studio|}}
+                <li>
+                    {{#link-to 'studio' studio.id}}
+                        {{little-emblem type="studio-emblem" slug=studio.slug}}
+                        {{studio.name}}
+                    {{/link-to}}
+                </li>
+            {{/each}}
+            <li class="divider"></li>
+            <li>
+                <a class="ember-link" {{action "openModal" "maintenance-dialog"}}>
+                    Outils de maintenance…
+                </a>
+            </li>
+            <li class="disabled">
+                <a class="ember-link" tabindex="-1">
+                    À propos de Dradis...
+                </a>
+            </li>
+        </ul>
+        <div class="main-search-field-zone">
+            <input class="main-search-field" placeholder="Artiste, titre, chronique…">
+            <i class="fa fa-fw fa-search icon-search"></i>
+        </div>
+        <div class="top-right-zone">
+            {{#if status.serverTime}}
+                <ul class="nav navbar-nav pull-right">
+                    {{#if status.liquidsoapOnline}}
+                        <li>
+                            <a class="ember-link">
+                                <i class="fa fa-fw fa-bolt"></i>
+                                <strong class="ellipsised">{{ status.liveMetadata.artist }}</strong> −
+                                <em class="ellipsised">{{ status.liveMetadata.title }}</em>
+                            </a>
+                        </li>
+                        <li class="navbar-text" style="margin-left: 0;">
+                            {{#if status.permanentSelected}}
+                                <span class="label label-default big-label">
+                                    <i class="fa fa-fw fa-music"></i> Perm.
+                                </span>
+                            {{else}}
+                                {{#if currentStudioSelected}}
+                                    <span class="label label-success big-label">
+                                        {{ status.humanizedSelected }}
+                                    </span>
+                                {{else}}
+                                    <span class="label label-danger big-label">
+                                        <i class="fa fa-fw fa-warning"></i>
+                                        {{ status.humanizedSelected }}
+                                    </span>
+                                {{/if}}
+                            {{/if}}
+                        </li>
+                    {{/if}}
+                    <li class="navbar-text" style="margin-left: 0; margin-right: 0;">
+                        {{ status.listeners }} aud.
+                    </li>
+                    <li class="navbar-text">
+                        {{ status.humanTime }}
+                    </li>
+                </ul>
+            {{else}}
+                <p class="navbar-text pull-right">
+                    <i class="fa fa-fw fa-spinner"></i> En attente de la connexion…
+                </p>
+            {{/if}}
+        </div>
+        {{!-- {{#if status.liquidsoapOnline}}
+                <p class="navbar-text info-zone">
+                    {{#if currentStudioSelected}}
+                        <span class="label label-success big-label">
+                            <i class="fa fa-fw fa-bolt"></i>
+                            En direct
+                        </span>
+                    {{else}}
+                        {{#if currentStudioRecording}}
+                            <span class="label label-success big-label">
+                                <i class="fa fa-fw fa-save"></i>
+                                Enregistré
+                            </span>
+                        {{else}}
+                            <span class="label label-default big-label">
+                                <i class="fa fa-fw fa-power-off"></i>
+                                Éteint
+                            </span>
+                        {{/if}}
+                    {{/if}}
+                    {{#if plateauRunning}}
+                        <span class="label label-danger big-label">
+                            <i class="fa fa-fw fa-microphone"></i>
+                            Plateau
+                        </span>
+                    {{else}}
+                        {{#if jukeboxRunning}}
+                            <span class="label label-default big-label">
+                                <i class="fa fa-fw fa-music"></i>
+                                Jukebox
+                            </span>
+                            {{#if plateauIncoming}}
+                                <span class="label label-warning big-label">
+                                    <i class="fa fa-fw fa-exclamation"></i>
+                                    Plateau dans {{secondsBeforeNextAction}} sec.
+                                </span>
+                            {{else}}
+                                {{#if secondsBeforeNextAction}}
+                                    <span class="label label-outline big-label">
+                                        <i class="fa fa-fw fa-history fa-flip-horizontal"></i>
+                                        {{duration secondsBeforeNextAction}}
+                                    </span>
+                                {{/if}}
+                            {{/if}}
+                        {{/if}}
+                    {{/if}}
+                </p>
+            {{else}}
+                {{#if status.serverTime}}
+                    <p class="navbar-text info-zone">
+                        <span class="label label-danger big-label">
+                            <i class="fa fa-fw fa-warning"></i>
+                            Antenne cassée ⋅ Contactez un administrateur
+                        </span>
+                    </p>
+                {{else}}
+                    <p class="navbar-text pull-left">
+                        <i class="fa fa-fw fa-spinner"></i> En attente de la connexion…
+                    </p>
+                {{/if}}
+            {{/if}}
+
+
+            --}}
+    </nav>

@@ -1,0 +1,25 @@
+<svg class="visual-clock-meter" width="50" height="50">
+    <circle cx="25" cy="25" r="24" class="background"></circle>
+    <path d="{{visualClockArc}}"></path>
+</svg>
+<p class="metadata title">
+    <strong>
+        {{#if media.title}}
+            {{media.title}}
+        {{else}}
+            {{media.filename}}
+        {{/if}}
+        {{#if repeated}}
+            <i class="fa fa-fw fa-repeat"></i>
+        {{/if}}
+    </strong>
+</p>
+<p class="metadata artist-album">
+    <em>{{media.artist}}</em>
+    ({{media.album}})
+</p>
+<p class="metadata numeric-timers">
+    {{duration elapsed}}
+    /
+    {{duration length}}
+</p>

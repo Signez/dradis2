@@ -1,0 +1,141 @@
+<div class="main-scrollable-content">
+    <div class="container-fluid" style="margin-top: 20px;">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Mixer</h3>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                          <span class="pull-right">{{plateauDecibels}} dB</span>
+                          <i class="fa fa-fw fa-microphone"></i> Plateau
+                        </li>
+                        <li class="list-group-item">
+                          <span class="pull-right">{{jukeboxDecibels}} dB</span>
+                          <i class="fa fa-fw fa-music"></i> Jukebox
+                        </li>
+                        <li class="list-group-item">
+                          <span class="pull-right">{{bedDecibels}} dB</span>
+                          <i class="fa fa-fw fa-leaf"></i> Fond musical
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            {{#if isEqualizerPowered}}
+                                <span class="label label-success pull-right">ON</span>
+                            {{else}}
+                                <span class="label label-danger pull-right">OFF</span>
+                            {{/if}}
+                            <i class="fa fa-microphone"></i>&nbsp; Égaliseur
+                        </h3>
+                    </div>
+                    <ul class="console-square-group">
+                        {{console-square label="B1 Bandwidth" value=studioStatus.penguinEqB1Bandwidth unit="oct."}}
+                        {{console-square label="B1 Fréq." value=studioStatus.penguinEqB1Freq unit="Hz"}}
+                        {{console-square label="B1 Gain" value=studioStatus.penguinEqB1Gain unit="dB"}}
+                        {{console-square label="B2 Bandwidth" value=studioStatus.penguinEqB2Bandwidth unit="oct."}}
+                        {{console-square label="B2 Fréq." value=studioStatus.penguinEqB2Freq unit="Hz"}}
+                        {{console-square label="B2 Gain" value=studioStatus.penguinEqB2Gain unit="dB"}}
+                        {{console-square label="B3 Bandwidth" value=studioStatus.penguinEqB3Bandwidth unit="oct."}}
+                        {{console-square label="B3 Fréq." value=studioStatus.penguinEqB3Freq unit="Hz"}}
+                        {{console-square label="B3 Gain" value=studioStatus.penguinEqB3Gain unit="dB"}}
+                        {{console-square label="Low-freq Slope" value=studioStatus.penguinEqLowSlope unit=""}}
+                        {{console-square label="Low-freq. Fréq." value=studioStatus.penguinEqLowFreq unit="Hz"}}
+                        {{console-square label="Low-freq. Gain" value=studioStatus.penguinEqLowGain unit="dB"}}
+                    </ul>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            {{#if isPregainPowered}}
+                                <span class="label label-success pull-right">ON</span>
+                            {{else}}
+                                <span class="label label-danger pull-right">OFF</span>
+                            {{/if}}
+                            <i class="fa fa-microphone"></i>&nbsp; Pré-gain
+                        </h3>
+                    </div>
+                    <ul class="console-square-group">
+                        {{console-square label="Gain" value=studioStatus.penguinPregainGain unit="dB"}}
+                    </ul>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            {{#if isCompressorPowered}}
+                                <span class="label label-success pull-right">ON</span>
+                            {{else}}
+                                <span class="label label-danger pull-right">OFF</span>
+                            {{/if}}
+                            <i class="fa fa-microphone"></i>&nbsp; Compresseur
+                        </h3>
+                    </div>
+                    <ul class="console-square-group">
+                        {{console-square label="Attaque" value=studioStatus.penguinCompAttack unit="ms"}}
+                        {{console-square label="Knee Radius" value=studioStatus.penguinCompKneeradius unit="dB"}}
+                        {{console-square label="Make-up Gain" value=studioStatus.penguinCompMakeupgain unit="dB"}}
+                        {{console-square label="Ratio" value=studioStatus.penguinCompRatio unit=""}}
+                        {{console-square label="Release" value=studioStatus.penguinCompRelease unit="ms"}}
+                        {{console-square label="Threshold" value=studioStatus.penguinCompThreshold unit="dB"}}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-xs-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            {{#if isLimiterPowered}}
+                                <span class="label label-success pull-right">ON</span>
+                            {{else}}
+                                <span class="label label-danger pull-right">OFF</span>
+                            {{/if}}
+                            <i class="fa fa-microphone"></i>&nbsp; Limiteur
+                        </h3>
+                    </div>
+                    <ul class="console-square-group">
+                        {{console-square label="Input Gain" value=studioStatus.penguinLimitInputgain unit="dB"}}
+                        {{console-square label="Limit" value=studioStatus.penguinLimitLimit unit="dB"}}
+                        {{console-square label="Release time" value=studioStatus.penguinLimitReleaseTime unit="s"}}
+                    </ul>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            {{#if isStudioLimiterPowered}}
+                                <span class="label label-success pull-right">ON</span>
+                            {{else}}
+                                <span class="label label-danger pull-right">OFF</span>
+                            {{/if}}
+                            Limiteur (Studio)
+                        </h3>
+                    </div>
+                    <ul class="console-square-group">
+                        {{console-square label="Input Gain" value=studioStatus.snakeLimitInputgain unit="dB"}}
+                        {{console-square label="Limit" value=studioStatus.snakeLimitLimit unit="dB"}}
+                        {{console-square label="Release time" value=studioStatus.snakeLimitReleaseTime unit="s"}}
+                    </ul>
+                </div>
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Feedback
+                        </h3>
+                    </div>
+                    <ul class="console-square-group">
+                        {{console-square label="Volume" value=feedbackDecibels unit="dB"}}
+                        {{console-square label="Gain fond musical" value=feedbackBedGainDecibels unit="dB"}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

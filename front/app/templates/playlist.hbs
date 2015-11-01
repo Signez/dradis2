@@ -1,0 +1,90 @@
+<div class="navbar navbar-default navbar-static-top" style="margin-bottom: 0;">
+    <div class="container-fluid">
+        {{#with playlist.currentElement as |element|}}
+            <div class="nav navbar-left navbar-form" style="padding-left: 0; padding-right: 0;">
+                {{#if element.isPlaying}}
+                    {{#if element.media}}
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-default" {{action "skip" element}}>
+                                <i class="fa fa-fw fa-fast-forward"></i> Sauter
+                            </button>
+                        </div>
+                    {{else}}
+                        {{#if element.action}}
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fa fa-fw fa-play"></i> Lancer l'intro.
+                                </button>
+                                <button type="submit" class="btn btn-default" {{action "endLive"}}>
+                                    <i class="fa fa-fw fa-step-forward"></i>
+                                </button>
+                            </div>
+                        {{/if}}
+                    {{/if}}
+                {{else}}
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-fw fa-play-circle"></i> Démarrer l'émission <i class="fa fa-fw fa-caret-down"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li class="disabled"><a class="ember-link main-action" {{action "selectAndRun"}}><i class="fa fa-fw fa-play-circle"></i> Prendre l'antenne et démarrer</a></li>
+                          <li><a class="ember-link" {{action "run"}}><i class="fa fa-fw fa-play"></i> Démarrer sans être diffusé</a></li>
+                          <li class="divider"></li>
+                          <li><a class="ember-link"><i class="fa fa-fw fa-clock-o"></i> Programmer une prise d'antenne...</a></li>
+                        </ul>
+                    </div>
+                {{/if}}
+            </div>
+        {{else}}
+            <div class="nav navbar-left navbar-form btn-group" style="padding-left: 0;">
+                <button type="submit" class="btn btn-default disabled">
+                    <em>Playlist vide</em>
+                </button>
+            </div>
+        {{/with}}
+
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a class="ember-link dropdown-toggle"
+                   data-toggle="dropdown">
+                    <i class="fa fa-fw fa-plus-square"></i>
+                    Ajouter... <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="ember-link" {{action "addActionBySlug" "live"}}><i class="fa fa-fw fa-microphone"></i> <u>P</u>lateau</a></li>
+                    <li class="divider"></li>
+                    <li><a class="ember-link" {{action "addActionBySlug" "run_studio"}}><i class="fa fa-fw fa-bolt"></i> <u>D</u>ébut d'antenne</a></li>
+                    <li><a class="ember-link" {{action "addActionBySlug" "end_studio"}}><i class="fa fa-fw fa-power-off"></i> <u>F</u>in d'antenne</a></li>
+                    <li class="divider"></li>
+                    <li class="disabled"><a class="ember-link"><i class="fa fa-fw fa-magic"></i>Musique aléatoire...</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<ul class="playlist">
+    {{#each this as |element|}}
+        {{playlist-element content=element
+                           removeElement="removeElement"
+                           moveUp="moveUp"
+                           moveDown="moveDown"
+                           move="move"
+                           endLive="endLive"
+                           skip="skip"
+                           run="run"
+                           openModal="openModal"}}
+    {{/each}}
+    {{#if playlist.hasNoPendingElements}}
+        <li class="list-group-item playlist-hint nothing-in-playlist">
+            <img src="/front/assets/images/empty_playlist.svg" width="150" alt="" style="opacity: 0.3;"/> <br/>
+            Aucun titre n'est actuellement dans la playlist.
+        </li>
+    {{else}}
+        {{#if shouldHaveAPendingStudioEnding}}
+            <li class="list-group-item playlist-hint end-hint">
+                Auriez-vous oublié votre <a class="ember-link" {{action "addActionBySlug" "end_studio"}}>fin d'antenne</a> ?
+            </li>
+        {{/if}}
+    {{/if}}
+</ul>

@@ -1,0 +1,6 @@
+*.pyc
+static/.webassets-cache
+static/gen
+.env
+celerybeat-schedule
+celerybeat.pid

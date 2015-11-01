@@ -1,0 +1,81 @@
+<div class="main-scrollable-content">
+    <div class="container-fluid" style="margin-top: 20px;">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <p style="text-align: left; font-size: 20pt; margin-left: 20px; margin-top: 20px; margin-bottom: 20px;">
+                        <span class="{{view.studioEmblem}}">
+                            <i class="fa fa-fw fa-dashboard"></i>
+                        </span>
+
+                        {{model.name}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <i class="fa fa-fw fa-leaf"></i> Fond sonore
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        {{embedded-element
+                            media=model.bed
+                            length=model.bedLength
+                            elapsed=model.bedElapsed
+                            repeated=model.bedRepeat}}
+                        <p>
+                            {{#if model.bedOnAirSince}}
+                                <button class="btn btn-default" {{action "stopBed"}}>
+                                    <i class="fa fa-fw fa-stop"></i> Arrêter le fond
+                                </button>
+                            {{else}}
+                                <button class="btn btn-default" {{action "startBed"}}>
+                                    <i class="fa fa-fw fa-play"></i> Démarrer le fond
+                                </button>
+                            {{/if}}
+                            {{#if model.bedRepeat}}
+                                <button class="btn btn-default" {{action "setBedRepeat" false}}>
+                                    <i class="fa fa-fw fa-repeat"></i> Ne pas répéter
+                                </button>
+                            {{else}}
+                                <button class="btn btn-default" {{action "setBedRepeat" true}}>
+                                    <i class="fa fa-fw fa-repeat"></i> Répéter
+                                </button>
+                            {{/if}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="panel panel-default" style="opacity: 0">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Émission sélectionnée</h3>
+                    </div>
+                    <div class="panel-body">
+                        <button class="btn btn-default pull-right">Changer d'émission…</button>
+                        <p class="lead">Rétrosphère</p>
+                        <hr>
+                        <p>
+                            <span class="label label-outline big-label pull-right">
+                                <i class="fa fa-fw fa-history fa-flip-horizontal"></i> Dans 12 heures
+                            </span>
+                            <i class="fa fa-fw fa-clock-o"></i> 2h – Aujourd'hui, 20h30 → 21h30
+                        </p>
+                        <hr>
+                        <p><strong>Rétrosphère aux Joutes du Téméraire</strong></p>
+                        <p>
+                            Comme tous les ans, l'équipe de Rétrosphère est présente aux Joutes du Téméraire
+                            pour une émission en public. L'occasion de recevoir plein de créateurs présents
+                            sur le pôle Saga MP3 du festival pour quelques interviews sur leur parcours,
+                            leur œuvre et leur présence aux Joutes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

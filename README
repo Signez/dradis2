@@ -1,0 +1,17 @@
+Dradis 2
+========
+
+Manage a webradio in a breeze; handle live shows, upload songs, broadcast shows as it should be − simple and
+reactive.
+
+Created by actual showrunners from the now-closed french webradio [SynopsLive](http://www.synopslive.net/),
+it is powering both live and recorded podcasts.
+
+Technically, this is composed of multiple processes:
+
+ - An Ember.js web application,
+ - A Flask application which expose an API used by the Ember.js web application,
+ - A simple run-loop,
+ - A Liquidsoap backend, that do the actual audio generation and output an OGG/Vorbis and MP3-encoded feed,
+ - An Icecast instance, to broadcast Liquidsoap generated audio feed around the Internet.
+
